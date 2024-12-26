@@ -77,8 +77,24 @@ private:
 		void (Doodle6502::* execute)(uint16_t address);
 	};
 
-	std::array<Instruction, 256> opcodeTable = { {{"BRK",AddressingMode::implicit,7, &Doodle6502::BRK}}};
+	std::array<Instruction, 256> opcodeTable = { {
+		{"BRK",AddressingMode::implicit,7, &Doodle6502::BRK},			//00
+		{"ORA", AddressingMode::indexed_indirect,6, &Doodle6502::ORA},	//01
+		{"ILLEGAL",AddressingMode::implicit,1,&Doodle6502::ILLEGAL},	//02
+		{"ILLEGAL",AddressingMode::implicit,1,&Doodle6502::ILLEGAL},	//03
+		{"ILLEGAL",AddressingMode::implicit,1,&Doodle6502::ILLEGAL},	//04
+		{"ORA",AddressingMode::zeropage,3,&Doodle6502::ORA},			//05
+		{"ASL", AddressingMode::zeropage, 5, &Doodle6502::ASL},			//06
+		{"ILLEGAL",AddressingMode::implicit,1,&Doodle6502::ILLEGAL },	//07
+		{"PHP",AddressingMode::implicit,3,&Doodle6502::PHP},			//08
+		{"ORA",AddressingMode::immediate,2,&Doodle6502::ORA}			//09
+
+		} };
 	
 
 	void BRK(uint16_t);
+	void ORA(uint16_t);
+	void ILLEGAL(uint16_t);
+	void ASL(uint16_t);
+	void PHP(uint16_t);
 };
